@@ -11,8 +11,14 @@ then
   exit 2
 fi
 
-wget -c -q --show-progress "https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-11.4.0-amd64-DVD-1.iso"
+if [ -z $1 ]
+then
+	domain="unassigned-domain"
+else
+	domain=$1
+fi
 
+wget -c -q --show-progress "https://cdimage.debian.org/debian-cd/current/amd64/iso-dvd/debian-11.4.0-amd64-DVD-1.iso"
 
 #iname=$(ip -o link show | sed -rn '/^[0-9]+: en/{s/.: ([^:]*):.*/\1/p}')
 iname="wlp2s0"
@@ -25,7 +31,7 @@ virt-install \
 	--autostart \
 	--location="debian-11.4.0-amd64-DVD-1.iso" \
 	--initrd-inject preseed.cfg \
-	--extra-args="ks=file:/preseed.cfg"
+	--extra-args="ks=file:/preseed.cfg domain=$domain"
 
 # --network type=direct,source=$iname,source_mode=bridge,model=virtio \
 # --location="http://ftp.fr.debian.org/debian/dists/bullseye/main/installer-amd64/"
