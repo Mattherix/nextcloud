@@ -31,6 +31,7 @@ virt-install \
 	--autostart \
 	--location="debian-11.4.0-amd64-DVD-1.iso" \
 	--initrd-inject preseed.cfg \
+	--initrd-inject post-install.sh \
 	--extra-args="ks=file:/preseed.cfg domain=$domain"
 
 # --network type=direct,source=$iname,source_mode=bridge,model=virtio \
