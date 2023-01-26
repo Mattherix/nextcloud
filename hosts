@@ -1,0 +1,2 @@
+[nextcloud]
+node ansible_ssh_host=192.168.122.171 ansible_user=ansible

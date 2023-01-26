@@ -1,0 +1,35 @@
+---
+- name: Install, configure, and start Apache
+  become: true
+  block:
+    - name: Install apache2
+      ansible.builtin.package:
+        name: apache2
+        state: present
+
+    - name: Disable default site
+      ansible.builtin.command: /usr/sbin/a2dissite 000-default.conf
+      register: disable_apache_default
+      changed_when: "'Site 000-default already disabled' not in disable_apache_default.stdout"
+
+    - name: Nextcloud configuration
+      ansible.builtin.template:
+        src: nextcloud.conf.j2
+        dest: /etc/apache2/sites-available/nextcloud.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify: Restart apache2
+
+    - name: Enable nextcloud site
+      ansible.builtin.command: /usr/sbin/a2ensite nextcloud.conf
+      register: enable_apache_nextcloud
+      changed_when: "'Site nextcloud already enabled' not in enable_apache_nextcloud.stdout"
+
+    - name: Enable Apache2 modules
+      community.general.apache2_module:
+        state: present
+        name: "{{ item }}"
+      with_items:
+        - "{{ apache2_modules }}"
+      notify: Restart apache2
