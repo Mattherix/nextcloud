@@ -5,21 +5,4 @@
   remote_user: ansible
   roles:
     - install_apache2
-  tasks:
-    - name: Download Nextcloud Release
-      ansible.builtin.get_url:
-        url: "{{ nextcloud_release }}"
-        dest: /tmp/nextcloud.tar.bz2
-        checksum: "sha256:{{ nextcloud_release }}.sha256"
-        mode: "0400"
-
-    - name: Extract Nextcloud Release
-      become: true
-      ansible.builtin.unarchive:
-        src: /tmp/nextcloud.tar.bz2
-        dest: /var/www/
-        creates: /var/www/nextcloud
-        remote_src: true
-        mode: "0755"
-        group: "www-data"
-        owner: "www-data"
+    - nextcloud

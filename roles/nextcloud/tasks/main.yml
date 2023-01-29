@@ -1,0 +1,18 @@
+---
+- name: Download Nextcloud Release
+  ansible.builtin.get_url:
+    url: "{{ nextcloud_release }}"
+    dest: "{{ nextcloud_release_download_dest }}"
+    checksum: "{{ nextcloud_checksum }}"
+    mode: "0400"
+
+- name: Extract Nextcloud Release
+  become: true
+  ansible.builtin.unarchive:
+    src: "{{ nextcloud_release_download_dest }}"
+    dest: /var/www/
+    creates: /var/www/nextcloud
+    remote_src: true
+    mode: "0755"
+    group: "www-data"
+    owner: "www-data"
