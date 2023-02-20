@@ -28,8 +28,8 @@
 
     - name: Enable Apache2 modules
       community.general.apache2_module:
-        state: present
         name: "{{ item }}"
+        state: present
       with_items:
         - "{{ apache2_modules }}"
       notify: Restart apache2
