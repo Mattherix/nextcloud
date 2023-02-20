@@ -1,0 +1,45 @@
+---
+- name: Install, configure, and start php-fpm
+  become: true
+  block:
+    - name: Install PHP-FPM
+      ansible.builtin.package:
+        name: php-fpm
+        state: present
+
+    - name: Install php modules
+      ansible.builtin.package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "{{ php_module_list }}"
+
+    - name: Enable fcgi modules
+      community.general.apache2_module:
+        state: present
+        name: "{{ item }}"
+      with_items:
+        - proxy_fcgi
+        - setenvif
+      notify: Restart apache2
+
+    - name: Configure php-fpm
+      ansible.builtin.copy:
+        src: www.conf
+        dest: /etc/php/7.4/fpm/pool.d/www.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify: Restart php-fpm
+
+    - name: Enable php-fpm service
+      ansible.builtin.systemd:
+        name: php7.4-fpm.service
+        state: started
+        enabled: true
+
+    - name: Enable apache php-fpm conf
+      ansible.builtin.command: /usr/sbin/a2enconf php7.4-fpm
+      register: enable_apache_php_fpm_nextcloud
+      changed_when: "'Conf php7.4-fpm already enabled' not in enable_apache_php_fpm_nextcloud.stdout"
+      notify: Restart apache2

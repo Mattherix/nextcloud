@@ -1,0 +1,12 @@
+---
+- name: Restart apache2
+  become: true
+  ansible.builtin.systemd:
+    name: apache2.service
+    state: restarted
+
+- name: Restart php-fpm
+  become: true
+  ansible.builtin.systemd:
+    name: php7.4-fpm.service
+    state: restarted

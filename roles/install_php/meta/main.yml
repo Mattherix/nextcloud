@@ -1,6 +1,6 @@
 galaxy_info:
   author: Mattherix
-  description: Install nextcloud (for my home lab)
+  description: Install apache for in the context of a nextcloud install (for my home lab)
   license: EFL-2.0
   min_ansible_version: "2.1"
 
@@ -11,7 +11,7 @@ galaxy_info:
 
   galaxy_tags:
     - "nextcloud"
+    - "apache2"
+    - "php"
 
-dependencies:
-  - install_apache2
-  - install_php
+dependencies: []
