@@ -1,4 +1,4 @@
 ---
-nextcloud_release: "https://download.nextcloud.com/server/releases/latest.tar.bz2"
+nextcloud_release: "https://download.nextcloud.com/server/releases/nextcloud-{{ nextcloud_version }}.tar.bz2"
 nextcloud_checksum: "sha256:{{ nextcloud_release }}.sha256"
-nextcloud_release_download_dest: "/tmp/nextcloud.tar.bz2"
+nextcloud_release_download_dest: "/home/ansible/nextcloud-{{ nextcloud_version }}.tar.bz2"
