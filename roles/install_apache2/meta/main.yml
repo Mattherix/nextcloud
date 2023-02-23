@@ -1,6 +1,6 @@
 galaxy_info:
   author: Mattherix
-  description: Install apache for in the context of a nextcloud install (for my home lab)
+  description: Install apache in the context of a nextcloud install (for my home lab)
   license: EFL-2.0
   min_ansible_version: "2.1"
 
