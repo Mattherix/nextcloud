@@ -1,7 +1,4 @@
 ---
-fqdn:
-  - "{{ ansible_fqdn }}"
-
 apache2_modules:
   - rewrite
   - headers
