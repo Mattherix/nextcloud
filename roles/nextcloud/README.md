@@ -14,6 +14,7 @@ Dependencies
 ------------
 
 - install_apache2: Install and configure apache2
+- install_php: Install and configure php
 
 License
 -------
