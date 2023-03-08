@@ -14,3 +14,14 @@
 
     - name: Include secure install tasks
       ansible.builtin.include_tasks: "secure_install.yml"
+
+    - name: Create nextcloud's user
+      community.mysql.mysql_user:
+        user: "{{ db_user }}"
+        password: "{{ db_password }}"
+        priv: "{{ db_name }}.*:ALL"
+
+    - name: Create nextcloud's database
+      community.mysql.mysql_db:
+        name: "{{ db_name }}"
+        state: present
