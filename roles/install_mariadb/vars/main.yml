@@ -1,0 +1,10 @@
+---
+db_name: nextcloud
+db_user: nextcloud
+db_root_password: "{{ lookup('password', 'credentials/mariadbroot.txt chars=ascii_letters,digits length=32') }}"
+db_password: "{{ lookup('password', 'credentials/mariadb.txt chars=ascii_letters,digits length=32') }}"
+db_remote_access:
+  - "::1"
+  - "127.0.0.1"
+  - "localhost"
+mariadb_conf_dir: /etc/mysql/mariadb.conf.d/90-nextcloud.cnf

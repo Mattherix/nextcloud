@@ -1,0 +1,34 @@
+- name: Change root password
+  community.mysql.mysql_user:
+    name: ""
+    host: localhost
+    password: "{{ db_root_password }}"
+  no_log: true
+
+- name: Add mariadb user config files
+  ansible.builtin.template:
+    src: my.cnf.j2
+    dest: "~{{ ansible_user_id }}/.my.cnf"
+    owner: "{{ ansible_user_id }}"
+    mode: 0600
+  notify: "Restart mariadb"
+
+- name: Remove anonymous users
+  community.mysql.mysql_user:
+    name: ""
+    host_all: true
+    state: absent
+
+- name: Update root password
+  community.mysql.mysql_user:
+    user: "root"
+    password: "{{ db_root_password }}"
+    host: "{{ item }}"
+  no_log: true
+  with_items:
+    - "{{ db_remote_access }}"
+
+- name: Remove test database
+  community.mysql.mysql_db:
+    name: test
+    state: absent

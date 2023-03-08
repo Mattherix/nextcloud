@@ -1,0 +1,16 @@
+---
+- name: Install and configure mariadb
+  become: true
+  block:
+    - name: Install mariadb
+      ansible.builtin.package:
+        name: mariadb-server
+        state: present
+
+    - name: Adds Python Mariadb support on Debian/Ubuntu
+      ansible.builtin.apt:
+        pkg: python3-mysqldb
+        state: present
+
+    - name: Include secure install tasks
+      ansible.builtin.include_tasks: "secure_install.yml"
