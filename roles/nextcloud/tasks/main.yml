@@ -16,3 +16,11 @@
     mode: "0755"
     group: "www-data"
     owner: "www-data"
+
+- name: Nextcloud autoconfig
+  ansible.builtin.template:
+    src: autoconfig.php.j2
+    dest: /var/www/nextcloud/config/autoconfig.php
+    mode: "0755"
+    group: "www-data"
+    owner: "www-data"

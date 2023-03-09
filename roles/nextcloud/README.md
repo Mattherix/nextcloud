@@ -6,9 +6,10 @@ Install nextcloud in a VM for my homelab
 Role Variables
 --------------
 
-- nextcloud_release: The url of the archive of the Nextcloud release
-- nextcloud_checksum: The checksum of the release, defaulted to "sha256:{{ nextcloud_release }}.sha256"
-- nextcloud_release_download_dest: Where to download the release, defaulted to "/var/www/nextcloud.tar.bz2"
+- nextcloud_version: The nextcloud version to used
+- nextcloud_admin: The nextcloud admin username
+- nextcloud_admin_password: The nextcloud admin password
+- nextcloud_data_directory: The data directory used to store all users files
 
 Dependencies
 ------------
