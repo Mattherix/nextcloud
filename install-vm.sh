@@ -29,7 +29,7 @@ create_iso () {
 
 	cp preseed.cfg $COPY_PATH/preseed.cfg
 	cp post-install.sh $COPY_PATH/post-install.sh
-	cp post-install.sh $COPY_PATH/install.sh
+	cp install.sh $COPY_PATH/install.sh
 	sed -i "s/\$domain/$domain/g" $COPY_PATH/preseed.cfg
 
 	mkisofs $COPY_PATH -o debian-preseed.iso
