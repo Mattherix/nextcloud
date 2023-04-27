@@ -4,6 +4,7 @@
   block:
     - name: Install apache2
       ansible.builtin.package:
+        update_cache: true
         name: apache2
         state: present
 
