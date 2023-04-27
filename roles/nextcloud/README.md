@@ -11,6 +11,12 @@ Role Variables
 - nextcloud_admin_password: The nextcloud admin password
 - nextcloud_data_directory: The data directory used to store all users files
 
+- nextcloud_s3_name: The nextcloud bucket name if s3 primary storage is used
+- nextcloud_s3_key: The nextcloud bucket key if s3 primary storage is used
+- nextcloud_s3_secret: The nextcloud bucket secret key if s3 primary storage is used
+- nextcloud_s3_domain: The nextcloud bucket domain if s3 primary storage is used
+- nextcloud_s3_region: The nextcloud bucket region if s3 primary storage is used
+
 Dependencies
 ------------
 

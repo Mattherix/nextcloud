@@ -17,6 +17,15 @@
     group: "www-data"
     owner: "www-data"
 
+- name: Nextcloud storage config
+  ansible.builtin.template:
+    src: storage.config.php.j2
+    dest: /var/www/nextcloud/config/storage.config.php
+    mode: "0755"
+    group: "www-data"
+    owner: "www-data"
+  when: "nextcloud_s3_region is defined"
+
 - name: Nextcloud autoconfig
   ansible.builtin.template:
     src: autoconfig.php.j2
