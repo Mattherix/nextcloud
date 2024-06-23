@@ -24,8 +24,8 @@
       notify: Restart apache2
 
     - name: Configure php-fpm
-      ansible.builtin.copy:
-        src: www.conf
+      ansible.builtin.template:
+        src: www.conf.j2
         dest: "/etc/php/{{ php_version }}/fpm/pool.d/www.conf"
         owner: root
         group: root
