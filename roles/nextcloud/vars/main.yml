@@ -1,5 +1,5 @@
 ---
-nextcloud_version: 25.0.4
+nextcloud_version: 29.0.2
 nextcloud_admin: admin
 nextcloud_admin_password: "{{ lookup('password', 'credentials/admin.txt chars=ascii_letters,digits length=32') }}"
 nextcloud_data_directory: /var/www/nextcloud/data
