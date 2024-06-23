@@ -9,7 +9,7 @@
 - name: Install Bzip2 to extract the Nextcloud release
   ansible.builtin.package:
     update_cache: true
-    name: apache2
+    name: bzip2
     state: present
 
 - name: Extract Nextcloud Release
