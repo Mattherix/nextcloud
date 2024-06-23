@@ -26,7 +26,7 @@
     - name: Configure php-fpm
       ansible.builtin.copy:
         src: www.conf
-        dest: /etc/php/7.4/fpm/pool.d/www.conf
+        dest: "/etc/php/{{ php_version }}/fpm/pool.d/www.conf"
         owner: root
         group: root
         mode: 0644
@@ -34,12 +34,14 @@
 
     - name: Enable php-fpm service
       ansible.builtin.systemd:
-        name: php7.4-fpm.service
+        name: "php{{ php_version }}-fpm.service"
         state: started
         enabled: true
 
     - name: Enable apache php-fpm conf
-      ansible.builtin.command: /usr/sbin/a2enconf php7.4-fpm
+      ansible.builtin.command: /usr/sbin/a2enconf php{{ php_version }}-fpm
       register: enable_apache_php_fpm_nextcloud
-      changed_when: "'Conf php7.4-fpm already enabled' not in enable_apache_php_fpm_nextcloud.stdout"
+      vars:
+        err_msg: "Conf php{{ php_version }}-fpm already enabled"
+      changed_when: "err_msg not in enable_apache_php_fpm_nextcloud.stdout"
       notify: Restart apache2

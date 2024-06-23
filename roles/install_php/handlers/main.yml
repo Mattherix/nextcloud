@@ -8,5 +8,5 @@
 - name: Restart php-fpm
   become: true
   ansible.builtin.systemd:
-    name: php7.4-fpm.service
+    name: "php{{ php_version }}-fpm.service"
     state: restarted
